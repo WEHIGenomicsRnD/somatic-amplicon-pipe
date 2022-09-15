@@ -1,0 +1,17 @@
+# fasta reference genome
+ref: 
+
+# db snp database file
+dbsnp:
+
+# target intervals file
+intervals: 
+
+# minimum base quality for variant calling
+minbq: 20
+
+# minimum mapping quality for variant calling
+minmq: 20
+
+# minimum VAF for variant calling
+minvf: 0.01
