@@ -1,0 +1,7 @@
+.snakemake
+.gitignore
+*.DS_Store
+*.swp
+._envs
+._*smk
+__pycache__

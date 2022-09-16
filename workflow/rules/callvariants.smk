@@ -10,9 +10,10 @@ rule pisces:
         "dotnet/2.1.809",
     conda:
         "../envs/pisces.yaml"
-    threads: 16
+    threads: cluster["pisces"]["threads"]
     resources:
-        mem_mb=8192,
+        mem_mb=cluster["pisces"]["mem_mb"],
+        runtime=cluster["pisces"]["runtime"],
     params:
         refdir=refdir,
         minbq=config["minbq"],

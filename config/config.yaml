@@ -7,6 +7,9 @@ dbsnp:
 # target intervals file
 intervals: 
 
+# extra options for indel realigner
+indelrealigner_extra: "--maxReadsForRealignment 500000"
+
 # minimum base quality for variant calling
 minbq: 20
 

@@ -8,7 +8,8 @@ rule replace_rg:
     params:
         extra="--RGLB lib1 --RGPL illumina --RGPU {sample} --RGSM {sample}",
     resources:
-        mem_mb=32768,
+        mem_mb=cluster["picard"]["mem_mb"],
+        runtime=cluster["picard"]["runtime"],
     wrapper:
         "v1.12.2/bio/picard/addorreplacereadgroups"
 
@@ -22,7 +23,10 @@ rule samtools_index_rg:
         "logs/samtools_index_rg/{sample}.log",
     params:
         extra="",
-    threads: 16
+    threads: cluster["samtools"]["threads"]
+    resources:
+        mem_mb=cluster["samtools"]["mem_mb"],
+        runtime=cluster["samtools"]["runtime"],
     wrapper:
         "v1.12.2/bio/samtools/index"
 
@@ -38,11 +42,12 @@ rule indelrealigner:
     log:
         "logs/gatk3/indelrealigner/{sample}.log",
     params:
-        extra="--maxReadsForRealignment 500000",
+        extra=config["indelrealigner_extra"],
         java_opts="",
-    threads: 16
+    threads: cluster["indelrealigner"]["threads"]
     resources:
-        mem_mb=8192,
+        mem_mb=cluster["indelrealigner"]["mem_mb"],
+        runtime=cluster["indelrealigner"]["runtime"],
     wrapper:
         "v1.12.2/bio/gatk3/indelrealigner"
 
@@ -56,6 +61,9 @@ rule samtools_index_ir:
         "logs/samtools_index_ir/{sample}.log",
     params:
         extra="",
-    threads: 16
+    threads: cluster["samtools"]["threads"]
+    resources:
+        mem_mb=cluster["samtools"]["mem_mb"],
+        runtime=cluster["samtools"]["runtime"],
     wrapper:
         "v1.12.2/bio/samtools/index"

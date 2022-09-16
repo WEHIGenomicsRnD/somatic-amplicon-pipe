@@ -1,0 +1,18 @@
+picard:
+    mem_mb: 32768
+    runtime: '0-5:0:0'
+
+samtools:
+    threads: 16
+    mem_mb: 8192
+    runtime: '0-5:0:0'
+
+indelrealigner:
+    threads: 16
+    mem_mb: 8192
+    runtime: '0-5:0:0'
+
+pisces:
+    threads: 16
+    mem_mb: 8192
+    runtime: '0-5:0:0'
