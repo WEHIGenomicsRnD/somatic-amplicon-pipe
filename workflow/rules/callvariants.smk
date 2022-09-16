@@ -3,7 +3,7 @@ rule pisces:
         bam="results/realigned/{sample}.bam",
         bam_index="results/realigned/{sample}.bam.bai",
     output:
-        vcf="results/variants/{sample}.genome.vcf",
+        vcf="results/variants/{sample}/{sample}.genome.vcf",
     log:
         "logs/pisces/{sample}.log",
     envmodules:
@@ -19,16 +19,16 @@ rule pisces:
         minbq=config["minbq"],
         minmq=config["minmq"],
         minvf=config["minvf"],
-        baselogname=lambda w, input: os.path.splitext(input[0])[0],
+        basename=lambda w, output: os.path.split(output[0])[0],
     shell:
         """
         pisces \
             -bam {input.bam} \
-            -o results/variants \
+            -o {params.basename} \
             -g {params.refdir} \
             -t {threads} \
-            --baselogname {params.baselogname} \
+            --baselogname {params.basename} \
             --minbq {params.minbq} \
             --minmq {params.minmq} \
-            --minvf {params.minvf} > {output.vcf}
+            --minvf {params.minvf}
         """

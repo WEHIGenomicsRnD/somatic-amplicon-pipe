@@ -25,5 +25,5 @@ samples = [os.path.basename(i).split(".bam")[0] for i in bams]
 
 
 def get_variant_call_output():
-    varcall_output = expand("results/variants/{sample}.genome.vcf", sample=samples)
+    varcall_output = expand("results/variants/{sample}/{sample}.genome.vcf", sample=samples)
     return varcall_output
